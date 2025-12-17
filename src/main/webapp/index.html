@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>College Management System</title>
+    <style>
+        /* Body and Background (Light Sky Blue Gradient for Glass Effect) */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* Central Glass Card Container (Glassmorphism Effect) */
+        .container { 
+            width: 90%;
+            max-width: 500px; 
+            padding: 30px; 
+            border-radius: 20px; 
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px);        
+            -webkit-backdrop-filter: blur(10px); 
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            color: #1d3557; 
+            text-align: center;
+            margin: 20px 0; /* Added margin for vertical spacing on small screens */
+        }
+        h2 { 
+            color: #1d3557; 
+            margin-bottom: 30px; 
+            font-weight: 600;
+        }
+        h3 {
+            color: #457b9d; 
+            margin-top: 25px;
+            font-size: 1.1em;
+            border-bottom: 1px solid rgba(29, 53, 87, 0.2);
+            padding-bottom: 5px;
+        }
+
+        /* Option Group Container */
+        .options-group { 
+            margin-top: 15px; 
+            margin-bottom: 20px; 
+            padding: 15px; 
+            border-radius: 10px; 
+            background: rgba(255, 255, 255, 0.4); 
+            
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            
+            flex-wrap: wrap; /* Allow wrapping for the report button */
+        }
+
+        /* Button Styling */
+        .option-button {
+            display: inline-block; 
+            width: 45%;
+            padding: 12px 15px;
+            margin: 5px 0;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px; 
+            font-size: 15px;
+            font-weight: 600;
+            color: white; /* Ensure text is white */
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Unique colors for each module */
+        .class-btn-color { background-color: #00bfff; }
+        .subject-btn-color { background-color: #05a9efde; }
+        .student-btn-color { background-color: #52b788; } 
+
+        /* Special Report Button Style */
+        .report-btn {
+            width: 100%; /* Full width for the report button */
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>College Management Portal</h2>
+
+        <h3>Class Management:</h3>
+        <div class="options-group">
+            <a href="class-form.jsp" class="option-button class-btn-color">Add New Class</a>
+            <a href="ClassServlet" class="option-button class-btn-color">Show Existing Classes</a>
+        </div>
+
+        <h3>Subject Management:</h3>
+        <div class="options-group">
+            <a href="subject-form.jsp" class="option-button subject-btn-color">Add New Subject</a>
+            <a href="SubjectServlet" class="option-button subject-btn-color">Show Existing Subjects</a>
+        </div>
+
+        <h3>Student Management:</h3>
+        <div class="options-group">
+            <a href="StudentServlet?action=new" class="option-button student-btn-color">Register New Student</a>
+            <a href="StudentServlet" class="option-button student-btn-color">Show Existing Students</a>
+        </div>
+
+        <h3>Admin Reports:</h3>
+        <div class="options-group">
+            <a href="StudentServlet?action=report" class="option-button report-btn">
+                📊 View Master Enrollment Matrix
+            </a>
+        </div>
+    </div>
+</body>
+</html>
