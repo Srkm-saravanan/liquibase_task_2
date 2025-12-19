@@ -4,184 +4,98 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>All Subjects</title>
+    <title>Subject List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS from class-list.jsp for Glassmorphism consistency */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 0; 
+            margin: 0; padding: 0; 
             background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
         }
         .container { 
-            width: 90%;
-            max-width: 900px; 
-            padding: 30px; 
-            border-radius: 20px; 
-            background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(10px);        
-            -webkit-backdrop-filter: blur(10px); 
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
+            width: 90%; max-width: 900px; padding: 35px; border-radius: 20px; 
+            background: rgba(255, 255, 255, 0.25); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37); 
             border: 1px solid rgba(255, 255, 255, 0.3); 
-            color: #1d3557; 
-            text-align: center;
+            color: #1d3557; text-align: center;
         }
-        h2 { 
-            color: #1d3557; 
-            margin-bottom: 20px; 
-            font-weight: 600;
-        }
-        h3 {
-            color: #457b9d; 
-            margin-top: 20px;
-            font-size: 1.1em;
-            text-align: left;
-        }
-        .message { 
-            padding: 15px; 
-            margin-bottom: 20px; 
-            border-radius: 8px; 
-            font-weight: 600; 
-            background-color: #d8f3da;
-            color: #1e7e34; 
-            border: 1px solid #c3e6cb;
-            text-align: left;
-        }
-
+        h2 { color: #1d3557; margin-bottom: 25px; font-weight: 600; font-size: 1.8em; }
+        
         /* Table Styling */
         table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
-            border-radius: 8px;
-            overflow: hidden; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%; border-collapse: separate; border-spacing: 0; 
+            margin-top: 20px; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.6);
         }
-        th, td { 
-            border: 1px solid rgba(29, 53, 87, 0.1); 
-            padding: 15px; 
-            text-align: left; 
-        }
-        th { 
-            background-color: #457b9d; 
-            color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9em;
-        }
-        tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.3); 
-        }
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.5); 
-        }
-        th:first-child, td:first-child {
-            width: 5%;
-            text-align: center;
-        }
-        th:last-child, td:last-child {
-            width: 10%;
-            text-align: center;
-        }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(29, 53, 87, 0.1); }
+        th { background-color: #2a9d8f; color: white; text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px; }
+        tr:hover { background-color: rgba(255, 255, 255, 0.8); }
 
-        /* Delete Button Style */
-        .delete-btn {
-            background-color: #e76f51; 
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
+        .btn-delete {
+            background-color: #e76f51; color: white; padding: 6px 12px;
+            text-decoration: none; border-radius: 5px; font-size: 0.85em; font-weight: bold;
+            transition: 0.3s;
         }
-        .delete-btn:hover {
-            background-color: #cc4e30;
-        }
-        
-        /* Navigation Link Styling */
+        .btn-delete:hover { background-color: #c0392b; }
+
         .add-link { 
-            display: inline-block; 
-            margin-top: 20px; 
-            padding: 12px 15px; 
-            text-decoration: none; 
-            border-radius: 10px; 
-            font-size: 15px;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block; margin: 15px 10px; padding: 12px 20px; text-decoration: none; 
+            border-radius: 10px; font-weight: 600; color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s;
         }
-        .add-another-btn {
-            background-color: #52b788; 
-            color: white;
-        }
-        .main-menu-btn {
-            background-color: #00bfff; 
-            color: white;
-            margin-left: 10px;
-        }
-        .add-link:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
+        .add-link:hover { transform: translateY(-2px); }
+        .btn-add { background-color: #2a9d8f; }
+        .btn-menu { background-color: #1d3557; }
     </style>
-
-    <script type="text/javascript">
-        function confirmDelete(subjectId, subjectName) {
-            var message = "Are you sure you want to delete the subject: " + subjectName + "?";
-            if (confirm(message)) {
-                // IMPORTANT: Note the Servlet is 'SubjectServlet' here
-                window.location.href = 'SubjectServlet?action=delete&id=' + subjectId;
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <h2>Subject Management Report</h2>
+        <h2><i class="fas fa-book"></i> Subject Management</h2>
 
         <c:if test="${not empty message}">
-            <p class="message">${message}</p>
+            <div style="background:#d4edda; color:#155724; padding:10px; border-radius:5px; margin-bottom:15px;">
+                ${message}
+            </div>
         </c:if>
 
-        <h3>Existing Subjects in Database:</h3>
-        <c:if test="${empty subjectList}">
-            <p style="text-align: left;">No subjects found in the database yet. Click 'Add Another Subject' to get started!</p>
-        </c:if>
-        <c:if test="${not empty subjectList}">
-            <table>
-                <thead>
-                    <tr>
-                        <th>S.No.</th>
-                        <th>ID</th>
-                        <th>Subject Name</th>
-                        <th>Action</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="sub" items="${subjectList}" varStatus="loop"> 
+        <c:choose>
+            <c:when test="${not empty subjectList}">
+                <table>
+                    <thead>
                         <tr>
-                            <td>${loop.index + 1}</td>
-                            <td>${sub.subjectId}</td>
-                            <td>${sub.subjectName}</td>
-                            <td>
-                                <button class="delete-btn" 
-                                    onclick="confirmDelete(${sub.subjectId}, '${sub.subjectName}')">
-                                    Delete
-                                </button>
-                            </td>
+                            <th style="width: 10%;">S.No</th> <th style="width: 15%;">Subject ID</th>
+                            <th>Subject Name</th>
+                            <th style="width: 15%;">Action</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </c:if>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="subject" items="${subjectList}" varStatus="loop">
+                            <tr>
+                                <td>${loop.count}</td> <td>#${subject.subjectId}</td>
+                                <td style="font-weight: 600; color: #333;">${subject.subjectName}</td>
+                                <td>
+                                    <a href="SubjectServlet?action=delete&id=${subject.subjectId}" class="btn-delete" 
+                                       onclick="return confirm('Delete subject: ${subject.subjectName}?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <p>No subjects found. Add one below!</p>
+            </c:otherwise>
+        </c:choose>
 
-        <a href="subject-form.jsp" class="add-link add-another-btn">← Add Another Subject</a>
-        <a href="index.html" class="add-link main-menu-btn">Main Menu</a>
+        <div style="margin-top: 30px;">
+            <a href="subject-form.jsp" class="add-link btn-add"><i class="fas fa-plus"></i> Add New Subject</a>
+            <a href="index.html" class="add-link btn-menu"><i class="fas fa-home"></i> Main Menu</a>
+        </div>
     </div>
 </body>
 </html>

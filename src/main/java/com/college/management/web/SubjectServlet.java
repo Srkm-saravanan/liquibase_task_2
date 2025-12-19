@@ -23,54 +23,66 @@ public class SubjectServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        // POST is used for inserting data
+        
+        // 1. Insert the new Subject
         insertNewSubject(request);
-        // After insertion, redirect to GET method to show the updated list
-        doGet(request, response);
+        
+        // 2. REDIRECT to the list (Fixes the "Wrong Page" & "Double Submit" bugs)
+        response.sendRedirect("SubjectServlet?action=list");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Check for the 'action' parameter to see if a delete request was sent
         String action = request.getParameter("action");
-        if (action != null && action.equals("delete")) {
-            deleteSubject(request);
+        if (action == null) { action = "list"; }
+
+        switch (action) {
+            case "new":
+                showNewForm(request, response);
+                break;
+            case "delete":
+                deleteSubject(request);
+                // Redirect after delete to refresh list cleanly
+                response.sendRedirect("SubjectServlet?action=list");
+                break;
+            default:
+                listSubjects(request, response); // Default: Show the list
+                break;
         }
-        
-        // Always retrieve and show the list of subjects
-        List<Subject> subjectList = subjectDAO.selectAllSubjects();
-        request.setAttribute("subjectList", subjectList);
-        
-        request.getRequestDispatcher("subject-list.jsp").forward(request, response);
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        request.getRequestDispatcher("subject-form.jsp").forward(request, response);
     }
 
     private void insertNewSubject(HttpServletRequest request) {
         String subjectName = request.getParameter("subjectName");
         if (subjectName != null && !subjectName.trim().isEmpty()) {
             Subject newSubject = new Subject(subjectName.trim());
-            int newId = subjectDAO.insertSubject(newSubject);
-            
-            if (newId != -1) {
-                request.setAttribute("message", "Success! Subject '" + subjectName + "' added with ID: " + newId);
-            } else {
-                request.setAttribute("message", "Error! Subject could not be added.");
-            }
+            subjectDAO.insertSubject(newSubject);
+            // We don't set "message" here because sendRedirect wipes it. 
+            // In a real app, we would use a Session attribute for "Flash Messages".
         }
+    }
+
+    private void listSubjects(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        // 1. Get all subjects from DB
+        List<Subject> listSubject = subjectDAO.selectAllSubjects();
+        
+        // 2. Send to JSP
+        request.setAttribute("subjectList", listSubject);
+        request.getRequestDispatcher("subject-list.jsp").forward(request, response);
     }
 
     private void deleteSubject(HttpServletRequest request) {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            boolean isSuccess = subjectDAO.deleteSubject(id);
-            
-            if (isSuccess) {
-                request.setAttribute("message", "Success! Subject with ID " + id + " was deleted.");
-            } else {
-                request.setAttribute("message", "Error! Subject with ID " + id + " could not be found or deleted.");
-            }
+            subjectDAO.deleteSubject(id);
         } catch (NumberFormatException e) {
-            request.setAttribute("message", "Error! Invalid subject ID provided for deletion.");
+            e.printStackTrace();
         }
     }
 }

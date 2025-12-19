@@ -3,101 +3,43 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Manage Subjects</title>
+    <title>Add Subject</title>
     <style>
-        /* CSS from index.html and class-form.jsp for Glassmorphism consistency */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            margin: 0; background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%); 
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
         }
-        .container { 
-            width: 90%;
-            max-width: 400px; 
-            padding: 30px; 
-            border-radius: 20px; 
-            background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(10px);        
-            -webkit-backdrop-filter: blur(10px); 
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
+        .glass-card { 
+            width: 350px; padding: 40px; border-radius: 20px; 
+            background: rgba(255, 255, 255, 0.25); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37); 
             border: 1px solid rgba(255, 255, 255, 0.3); 
-            color: #1d3557; 
             text-align: center;
         }
-        h2 { 
-            color: #1d3557; 
-            margin-bottom: 30px; 
-            font-weight: 600;
+        h2 { color: #1d3557; margin-bottom: 25px; }
+        input[type="text"] {
+            width: 90%; padding: 12px; margin-bottom: 20px; border-radius: 8px;
+            border: 1px solid #ccc; font-size: 1rem;
         }
-        .form-group { 
-            margin-bottom: 20px; 
-            text-align: left; 
+        button {
+            width: 100%; padding: 12px; background-color: #2a9d8f; color: white;
+            border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: bold;
+            transition: 0.3s;
         }
-        label { 
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: 600; 
-            color: #1d3557; 
-            font-size: 1.1em;
-        }
-        input[type="text"] { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid rgba(29, 53, 87, 0.4); 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            background: rgba(255, 255, 255, 0.6); 
-            color: #1d3557;
-        }
-        input[type="submit"] { 
-            background-color: #52b788; 
-            color: white; 
-            padding: 12px 15px; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-size: 16px; 
-            width: 100%;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        input[type="submit"]:hover { 
-            background-color: #40916c; 
-            transform: translateY(-2px);
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            color: #1d3557; 
-            text-decoration: none;
-            font-weight: 600;
-            padding: 5px 10px;
-            border: 1px solid transparent;
-            border-radius: 5px;
-            transition: border-color 0.2s;
-        }
-        a:hover {
-            border-color: #1d3557;
-        }
+        button:hover { background-color: #21867a; transform: translateY(-2px); }
+        .back-link { display: block; margin-top: 20px; color: #1d3557; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Enter New Subject</h2>
+    <div class="glass-card">
+        <h2>Add New Subject</h2>
         <form action="SubjectServlet" method="post">
-            <div class="form-group">
-                <label for="subjectName">Subject Name (e.g., Mathematics, Java Programming):</label>
-                <input type="text" id="subjectName" name="subjectName" required>
-            </div>
-            <input type="submit" value="Add Subject">
+            <input type="text" name="subjectName" required placeholder="Ex: Data Structures">
+            <button type="submit">Save Subject</button>
         </form>
-        <p><a href="index.html">← Back to Main Menu</a></p>
+        <a href="index.html" class="back-link">← Back to Menu</a>
     </div>
 </body>
 </html>

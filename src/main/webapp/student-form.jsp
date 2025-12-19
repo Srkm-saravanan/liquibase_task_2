@@ -53,6 +53,9 @@
         <h2>Register New Student</h2>
         
         <form action="StudentServlet" method="post">
+            <!-- Optional: helps servlet identify the action -->
+            <input type="hidden" name="formType" value="addStudent">
+            
             <div class="form-group">
                 <label>Roll Number:</label>
                 <input type="text" name="rollNumber" required placeholder="e.g. 2025-CSE-01">
@@ -60,19 +63,30 @@
 
             <div class="form-group">
                 <label>First Name:</label>
-                <input type="text" name="firstName" required placeholder="John">
+                <input type="text" name="firstName" required placeholder="e.g. John">
             </div>
             
             <div class="form-group">
                 <label>Last Name:</label>
-                <input type="text" name="lastName" required placeholder="Doe">
+                <input type="text" name="lastName" required placeholder="e.g. Doe">
             </div>
             
             <div class="form-group">
                 <label>Email:</label>
-                <input type="email" name="email" required placeholder="john@example.com">
+                <input type="email" name="email" required placeholder="e.g. john@example.com">
             </div>
-            
+
+            <!-- NEW FIELDS -->
+            <div class="form-group">
+                <label>Mobile Number:</label>
+                <input type="text" name="mobileNumber" required placeholder="e.g. 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label>Address:</label>
+                <input type="text" name="address" required placeholder="e.g. 123, Gandhi Road, Chennai">
+            </div>
+
             <div class="form-group">
                 <label>Assign Class:</label>
                 <select name="classId" required>
@@ -83,7 +97,7 @@
                 </select>
             </div>
 
-            <input type="submit" value="Save Student">
+            <input type="submit" value="Register Student">
         </form>
         
         <p><a href="index.html">← Back to Main Menu</a></p>
